@@ -1,0 +1,16 @@
+services:
+  dev-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../:/home/iguana/app
+      - ~/.ssh:/home/iguana/.ssh:ro
+      - ~/.gitconfig:/home/iguana/.gitconfig:ro
+
+    restart: always
+
+    ports:
+      - 3000:3000
+    tty: true
