@@ -1,10 +1,11 @@
 import vuetify from 'eslint-config-vuetify'
 import pluginVue from 'eslint-plugin-vue'
-import { defineConfig } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
 const config = defineConfig([
 	...pluginVue.configs['flat/recommended'],
 	...(await vuetify()),
+	globalIgnores(['.eslintrc-auto-import.json', 'auto-imports.d.ts']),
 	{
 		files: ['**/*.{js,ts,mts,tsx,vue}'],
 		rules: {

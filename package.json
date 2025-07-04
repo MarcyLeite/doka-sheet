@@ -10,7 +10,7 @@
 		"build-only": "vite build",
 		"test": "mocha",
 		"type-check": "vue-tsc --build --force",
-		"format": "prettier --write . && npm run lint",
+		"format": "pnpm run lint",
 		"lint": "eslint . --fix"
 	},
 	"dependencies": {
@@ -31,7 +31,6 @@
 		"mocha": "^11.7.1",
 		"npm-run-all2": "^7.0.2",
 		"pinia": "^3.0.1",
-		"prettier": "^3.6.2",
 		"sass-embedded": "^1.86.3",
 		"sinon": "^21.0.0",
 		"tsx": "^4.20.3",
