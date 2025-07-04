@@ -6,7 +6,10 @@
 	"shutdownAction": "stopCompose",
 	"customizations": {
 		"vscode": {
-			"extensions": ["Vue.volar"]
+			"extensions": [
+				"Vue.volar",
+				"dbaeumer.vscode-eslint"
+			]
 		}
 	}
 }
