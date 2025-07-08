@@ -12,6 +12,11 @@ declare module 'vue' {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SheetAbilities: typeof import('./components/SheetAbilities.vue')['default']
+    SheetHabilities: typeof import('./components/SheetHabilities.vue')['default']
+    SheetInventory: typeof import('./components/SheetInventory.vue')['default']
     SheetOverview: typeof import('./components/SheetOverview.vue')['default']
+    SheetTalent: typeof import('./components/SheetTalent.vue')['default']
+    SheetWrapper: typeof import('./components/SheetWrapper.vue')['default']
   }
 }

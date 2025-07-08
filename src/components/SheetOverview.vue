@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <span class="text-h3">Doka </span>
-    <span class="text-subtitle-1">by Marcy</span>
-  </div>
   <v-container>
-    <v-container class="px-0">
+    <v-container class="pa-0">
       <v-row>
         <v-col>
           <v-container class="pa-0">
@@ -43,7 +39,7 @@
                   v-model:model-value="attribute.value"
                   class="centered-input"
                   hide-details="auto"
-                  :label="attribute.name"
+                  :label="attribute.name.toUpperCase()"
                   readonly
                   variant="outlined"
                 />
@@ -55,38 +51,37 @@
         <v-col cols="4">
           <div class="h-100">
             <div class="p-relative border-sm rounded h-100">
-              <div class="text-subtitle-2 bg-surface ml-2 px-2" style="position: absolute; margin-top: -0.75em; float: left">
-                Classes
-              </div>
-              <div class="my-4">
-                <div class="px-4 d-flex justify-space-between w-100">
-                  <span class="text-subtitle-2">Level</span>
-                  <span>{{ computeLevel() }}</span>
+              <sheet-wrapper title="Classes">
+                <div class="my-4">
+                  <div class="px-4 d-flex justify-space-between w-100">
+                    <span class="text-subtitle-2">Level</span>
+                    <span>{{ computeLevel() }}</span>
+                  </div>
+                  <div class="overflow-auto px-4 h-100" style="max-height: 8em;">
+                    <v-text-field
+                      v-for="(pclass, i) in sheet.classList"
+                      :key="i"
+                      v-model:model-value="pclass.name"
+                      disabled
+                      hide-details="auto"
+                      :suffix="`${pclass.level}`"
+                      variant="underlined"
+                    />
+                  </div>
                 </div>
-                <div class="overflow-auto px-4 h-100" style="max-height: 8em;">
-                  <v-text-field
-                    v-for="(pclass, i) in sheet.classList"
-                    :key="i"
-                    v-model:model-value="pclass.name"
-                    hide-details="auto"
-                    readonly
-                    :suffix="`${pclass.level}`"
-                    variant="underlined"
-                  />
-                </div>
-              </div>
+              </sheet-wrapper>
             </div>
           </div>
         </v-col>
       </v-row>
     </v-container>
 
-    <v-divider />
+    <v-divider class="mt-4" />
 
     <v-container class="px-0">
       <v-row>
         <v-col>
-          <div class="d-flex flex-column  h-100">
+          <div class="d-flex flex-column h-100">
             <v-container class="pa-0 ma-0">
               <v-row>
                 <v-col>
@@ -113,7 +108,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col>
+                <v-col cols="8">
                   <v-number-input
                     control-variant="hidden"
                     hide-details="auto"
@@ -122,26 +117,34 @@
                     variant="outlined"
                   />
                 </v-col>
+                <v-col>
+                  <v-number-input
+                    control-variant="hidden"
+                    hide-details="auto"
+                    label="Velocidade (m)"
+                    :model-value="sheet.speed"
+                    readonly
+                    :suffix="`${Math.floor(sheet.speed / 1.5)}`"
+                    variant="outlined"
+                  />
+                </v-col>
               </v-row>
             </v-container>
-            <div class="p-relative border-sm rounded mt-6 flex-grow-1">
-              <div class="text-subtitle-2 bg-surface ml-2 px-2" style="position: absolute; margin-top: -0.75em; float: left">
-                Proficiências
-              </div>
-              <div class="my-4">
-                <div class="overflow-auto px-4 h-100" style="max-height: 8em;">
-                  <v-list disabled :items="sheet.proficiencyList" />
+
+            <div class="mt-6">
+              <sheet-wrapper title="Proficiências">
+                <div class="my-4">
+                  <div class="overflow-auto px-4 h-100" style="max-height: 8em;">
+                    <v-list disabled :items="sheet.proficiencyList" />
+                  </div>
                 </div>
-              </div>
+              </sheet-wrapper>
             </div>
           </div>
         </v-col>
         <v-col cols="6">
           <div class="h-100">
-            <div class="p-relative border-sm rounded h-100">
-              <div class="text-subtitle-2 bg-surface ml-2 px-2" style="position: absolute; margin-top: -0.75em; float: left">
-                Perícias
-              </div>
+            <sheet-wrapper title="Perícias">
               <div class="mt-4">
                 <div class="overflow-auto px-4 h-100" style="max-height: 16em;">
                   <v-data-table
@@ -152,16 +155,18 @@
                     :items-per-page="-1"
                   >
                     <template #item.trained="{ item }">
-                      <v-checkbox-btn
-                        v-model="item.trained"
-                        readonly
-                        :ripple="false"
-                      />
+                      <span>
+                        <v-checkbox-btn
+                          v-model="item.trained"
+                          readonly
+                          :ripple="false"
+                        />
+                      </span>
                     </template>
                   </v-data-table>
                 </div>
               </div>
-            </div>
+            </sheet-wrapper>
           </div>
         </v-col>
       </v-row>
@@ -176,9 +181,9 @@ const computeLevel = () => sheet.classList.reduce((total, pclass) => total + pcl
 const computeSkill = (skill: any) => skill.onlyTrained && !skill.trained ? '-' : Math.floor(computeLevel() / 2) + (sheet.attributeList.find(a => a.name === skill.attribute)?.value ?? 0)
 
 const skillTableHeaderList = [
-	{ title: 'Trained', key: 'trained', value: (item: any) => item.trained ?? false },
-	{ title: 'Skill', value: 'name' },
-	{ title: 'Total', key: 'total', value: (skill: any) => computeSkill(skill) },
+	{ title: 'Trained', maxWidth: 'fit-content', key: 'trained', value: (item: any) => item.trained ?? false },
+	{ title: 'Skill', key: 'name' },
+	{ title: 'Total', align: 'center' as const, key: 'total', value: (skill: any) => computeSkill(skill) },
 ]
 
 type Props = {
@@ -186,4 +191,10 @@ type Props = {
 }
 
 const { sheet } = defineProps<Props>()
+
 </script>
+<style scoped>
+    .centered-input >>> input {
+      text-align: center
+    }
+</style>
