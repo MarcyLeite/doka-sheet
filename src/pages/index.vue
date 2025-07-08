@@ -52,44 +52,43 @@ const baseSheet = {
 	creator: 'Marcy',
 
 	race: 'Humano',
-	origin: 'Alguma',
-	divinity: 'Nimb',
+	origin: 'Artesão',
+	divinity: '-',
 
 	classList: [
 		{
 			name: 'Inventor',
-			level: 3,
+			level: 5,
 		},
 	],
 	attributeList: [
-		{ name: 'for', value: 1 },
-		{ name: 'des', value: 1 },
-		{ name: 'con', value: 2 },
-		{ name: 'int', value: 3 },
-		{ name: 'sab', value: 2 },
-		{ name: 'car', value: 5 },
+		{ name: 'for', value: 0 },
+		{ name: 'des', value: 3 },
+		{ name: 'con', value: 0 },
+		{ name: 'int', value: 5 },
+		{ name: 'sab', value: 3 },
+		{ name: 'car', value: 1 },
 	],
 	hp: {
-		current: 15,
+		current: 24,
 		max: 20,
-		temp: 3,
+		temp: 0,
 	},
 	mp: {
-		current: 15,
+		current: 20,
 		max: 20,
-		temp: 3,
+		temp: 0,
 	},
-	ca: 13,
+	ca: 0,
 	speed: 9,
 
-	proficiencyList: ['Simples', 'Exótica'],
+	proficiencyList: ['Armas Marciais (distância)', 'Armas de Fogo'],
 
 	skillList: [
 		{
 			name: 'Acrobacia',
 			attribute: 'des',
 			penalty: true,
-			trained: true,
 		},
 		{
 			name: 'Adestramento',
@@ -112,6 +111,7 @@ const baseSheet = {
 			name: 'Conhecimento',
 			attribute: 'int',
 			onlyTrained: true,
+			trained: true,
 		},
 		{
 			name: 'Cura',
@@ -154,6 +154,7 @@ const baseSheet = {
 		{
 			name: 'Investigação',
 			attribute: 'int',
+			trained: true,
 		},
 		{
 			name: 'Jogatina',
@@ -174,6 +175,7 @@ const baseSheet = {
 			name: 'Misticismo',
 			attribute: 'int',
 			onlyTrained: true,
+			trained: true,
 		},
 		{
 			name: 'Nobreza',
@@ -181,8 +183,16 @@ const baseSheet = {
 			onlyTrained: true,
 		},
 		{
-			name: 'Ofício',
+			name: 'Ofício (engenhoqueiro)',
 			attribute: 'int',
+			onlyTrained: true,
+			trained: true,
+		},
+		{
+			name: 'Ofício (armeiro)',
+			attribute: 'int',
+			onlyTrained: true,
+			trained: true,
 		},
 		{
 			name: 'Percepção',
@@ -196,6 +206,12 @@ const baseSheet = {
 		{
 			name: 'Pontaria',
 			attribute: 'des',
+			trained: true,
+		},
+		{
+			name: 'Pontaria',
+			attribute: 'int',
+			trained: true,
 		},
 		{
 			name: 'Reflexos',
@@ -212,6 +228,7 @@ const baseSheet = {
 		{
 			name: 'Vontade',
 			attribute: 'sab',
+			trained: true,
 		},
 	],
 	inventory: {
@@ -265,29 +282,111 @@ const baseSheet = {
 	},
 	actionList: [
 		{
-			name: 'Algo',
-			action: 'passive',
+			name: 'Engenhosidade',
+			action: 'free',
 			category: 'ability',
+			from: 'Inventor 1',
 			cost: {
 				mana: 2,
 			},
-			range: 'mid',
 			effect: {
-				description: 'fazer algo',
-				area: 'cone 8m',
+				description: 'Quando faz um teste de perícia, você pode gastar 2 PM para somar a sua inteligência no teste. Você não pode usar esta habilidade em testes de ataque.',
 			},
 		},
 		{
-			name: 'Poder',
+			name: 'Protótipo',
+			action: 'passive',
+			category: 'ability',
+			from: 'Inventor 1',
+			effect: {
+				description: 'Você começa o jogo com um item superior , com o preço total de até T$ 500.',
+			},
+		},
+		{
+			name: 'Fabricar Item Superior (1)',
+			action: 'passive',
+			category: 'ability',
+			from: 'Inventor 2',
+			effect: {
+				description: 'Você recebe um item superior com preço de até T$ 2.000 e passa a poder fabricar item superiores com uma melhoria.',
+			},
+		},
+		{
+			name: 'Engenhoqueiro',
 			action: 'passive',
 			category: 'power',
-			cost: {
-				mana: 2,
-			},
-			range: 'mid',
+			from: 'Inventor 2',
 			effect: {
-				description: 'fazer algo',
-				area: 'cone 8m',
+				description: 'Você pode fabricar engenhocas.',
+			},
+		},
+		{
+			name: 'Comerciante',
+			action: 'free',
+			category: 'ability',
+			from: 'Inventor 3',
+			effect: {
+				description: 'Você pode vender itens 10% mais caro (não cumulativo com barganha).',
+			},
+		},
+		{
+			name: 'Autômato (Iniciante)',
+			action: 'passive',
+			category: 'power',
+			from: 'Inventor 3',
+			effect: {
+				description: 'Você fabrica um autômato, um construto que obedece a seus comandos. Se o autômato for destruído, você pode fabricar um novo com uma semana de trabalho e T$ 100.',
+			},
+		},
+		{
+			name: 'Balística',
+			action: 'passive',
+			category: 'power',
+			from: 'Inventor 4',
+			effect: {
+				description: 'Você recebe a proficiência com armas marciais de ataque à distância ou com armas de fogo. Quando usa uma arma de ataque à distância, pode usar sua inteligência em vez de Destreza nos testes de ataqeu (e, caso possua o poder Estilo de Disparo, nas rolagens de dano).',
+			},
+		},
+		{
+			name: 'Fabricar Item Superior (2)',
+			action: 'passive',
+			category: 'ability',
+			from: 'Inventor 5',
+			effect: {
+				description: 'Substitui seu item superior por um item superior com duas melhorarias. Passa a poder fabricar itens superiores com duas melhorias.',
+			},
+		},
+		{
+			name: 'Chutes e palavrões',
+			action: 'free',
+			category: 'power',
+			from: 'Inventor 5',
+			cost: {
+				mana: 1,
+			},
+			effect: {
+				description: 'Uma vez por rodada, você pode pagar 1 PM para repitir um teste de Ofício (engenhoqueiro) recém realizado para ativar uma engenhoca.',
+			},
+		},
+		{
+			name: 'Frutos do Trabalho',
+			action: 'passive',
+			category: 'power',
+			from: 'Artesão',
+			effect: {
+				description: 'Você recebeaté 5 itens gerais que possa fabricar num valor total de até T$ 100',
+			},
+		},
+		{
+			name: 'Sortudo',
+			action: 'free',
+			category: 'power',
+			from: 'Artesão',
+			cost: {
+				mana: 3,
+			},
+			effect: {
+				description: 'Você pode gastar 3 PM para rolar novamente um teste recém realizado (apenas uma vez por test)',
 			},
 		},
 	],
@@ -300,10 +399,24 @@ const updateInventory = () => {
 	sheet.inventory.itemPriceTotal = sheet.inventory.itemList.reduce((total, item) => total += item.price, 0)
 }
 
+const updateHP = () => {
+	const con = sheet.attributeList.find(a => a.name === 'con')!.value
+	sheet.hp.max = 12 + con + ((3 + con) * (sheet.classList[0].level - 1))
+}
+const updateMP = () => {
+	sheet.mp.max = 4 * sheet.classList[0].level
+}
+
 watch([sheet.inventory.itemList], updateInventory, { deep: true })
+watch([sheet.attributeList], () => {
+	updateHP()
+	updateMP()
+}, { deep: true })
 
 onMounted(() => {
 	updateInventory()
+	updateHP()
+	updateMP()
 })
 
 </script>

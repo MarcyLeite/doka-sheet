@@ -91,7 +91,7 @@
                     label="HP"
                     :max="sheet.hp.max"
                     :model-value="sheet.hp.current"
-                    :suffix="`${sheet.hp.max.toString()}+${sheet.hp.temp}`"
+                    :suffix="`${sheet.hp.max.toString()}${sheet.hp.temp ? `+${sheet.hp.temp}` : ''}`"
                     variant="outlined"
                   />
                 </v-col>
@@ -102,7 +102,7 @@
                     label="MP"
                     :max="sheet.mp.max"
                     :model-value="sheet.mp.current"
-                    :suffix="`${sheet.mp.max}+${sheet.mp.temp}`"
+                    :suffix="`${sheet.mp.max.toString()}${sheet.mp.temp ? `+${sheet.mp.temp}` : ''}`"
                     variant="outlined"
                   />
                 </v-col>

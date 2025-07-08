@@ -12,7 +12,7 @@
                   {title: 'Ação', key: 'action'},
                   {title: 'Mana', key: 'cost.mana'},
                   {title: 'Alcance', key: 'range'},
-                  {title: 'Efeito', key: 'effect.area'},
+                  {title: 'Area', key: 'effect.area'},
                   {title: '', key: 'effect.description'}
                 ]"
                 hide-default-footer
