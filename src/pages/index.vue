@@ -332,9 +332,9 @@ const baseSheet = {
 				name: 'Couro Batido (Ajustada)',
 				price: 335,
 				slotCost: 2,
-				metadata: {
-					defense: {
-						value: 3,
+				effect: {
+					wearing: (sheet: any) => {
+						sheet.ca += 3
 					},
 				},
 
@@ -628,6 +628,9 @@ const updateMP = () => {
 const updateMaxSlot = () => {
 	sheet.inventory.slotMax = 10 + (sheet.attributeList.find(a => a.name === 'for')!.value * 2)
 }
+const udpateDefense = () => {
+	sheet.ca = 10
+}
 
 watch([sheet.inventory.itemList], updateInventory, { deep: true })
 watch([sheet.inventoryOther.itemList], updateInventory, { deep: true })
@@ -642,9 +645,16 @@ onMounted(() => {
 	updateHP()
 	updateMP()
 	updateMaxSlot()
+	udpateDefense()
 
-	for (const item of sheet.inventory.itemList) {
-		if (item.effect?.having) item.effect?.having(sheet)
+	for (const i in sheet.inventory.itemList) {
+		const item = sheet.inventory.itemList[i]
+		if (item.effect?.having) item.effect.having(sheet)
+	}
+
+	for (const index of Object.values(sheet.inventory.equipped.wearing)) {
+		const item = sheet.inventory.itemList[index]
+		if (item.effect?.wearing) item.effect.wearing(sheet)
 	}
 })
 
