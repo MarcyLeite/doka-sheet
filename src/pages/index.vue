@@ -578,31 +578,28 @@ Teia cria várias camadas de fibras entrelaçadas e pegajosas na área. Qualquer
 			},
 		},
 		{
-			name: 'Névoa',
+			name: 'Controlar Plantas',
 			action: 'default',
 			category: 'magic',
 			from: 'Engenhoqueiro',
-			range: '6m raio 6 altura',
+			range: 'short',
 			duration: 'scene',
 			cost: {
 				mana: 1,
 			},
 			effect: {
-				area: 'cube 6',
-				description: `
-Uma névoa espessa eleva-se de um ponto a sua escolha, obscurecendo toda a visão — criaturas a até 1,5m têm camuflagem leve e criaturas a partir de 3m têm camuflagem total. Um vento forte dispersa a névoa em 4 rodadas e um vendaval a dispersa em 1 rodada. Esta não funciona sob a água.
+				area: 'square 9',
+				description: `Reflexos anula.
+		
+Esta magia só pode ser lançada em uma área com vegetação. As plantas se enroscam nas criaturas da área. Aquelas que falharem na resistência ficam enredadas. Uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo. Além disso, a área é considerada terreno difícil. No início de seus turnos, a vegetação tenta enredar novamente qualquer criatura na área, exigindo um novo teste de Reflexos.
 
-+1 PM: a magia também funciona sob a água, criando uma nuvem de tinta.
+Truque: muda a área para alvo de 1 planta e a resistência para nenhuma. Em vez do normal, você pode fazer a planta se mover como se fosse animada. Ela não pode causar dano ou atrapalhar a concentração de um conjurador.
 
-+2 PM: você pode escolher criaturas no alcance ao lançar a magia elas enxergam através do efeito. Requer 2º círculo.
++1 PM: muda a duração para instantânea. Em vez do normal, as plantas na área diminuem, como se tivessem sido podadas. Terreno difícil muda para terreno normal e não fornece camuflagem. Esse efeito dissipa o uso normal de Controlar Plantas.
 
-+2 PM: a nuvem tem um cheiro horrível. No início de seus turnos, qualquer criatura dentro dela, ou qualquer criatura com faro em alcance curto da nuvem, deve fazer um teste de Fortitude. Se falhar, fica enjoada por uma rodada.
++1 PM: além do normal, criaturas que falhem na resistência também ficam imóveis.
 
-+2 PM: a nuvem tem um tom esverdeado e se torna cáustica. No início de seus turnos, criaturas dentro dela sofrem 2d4 pontos de dano de ácido.
-
-+3 PM: aumenta o dano de ácido em +2d4.
-
-+5 PM: além do normal, a nuvem fica espessa, quase sólida. Qualquer criatura dentro dela tem seu deslocamento reduzido para 3m (independentemente de seu deslocamento normal) e sofre –2 em testes de ataque e rolagens de dano. `,
++2 PM: muda o alcance para pessoal, a área para alvo (você) e a resistência para nenhuma. Em vez do normal, você consegue se comunicar com plantas, que começam com atitude prestativa em relação a você. Além disso, você pode fazer testes de Diplomacia com plantas. Em geral, plantas têm uma percepção limitada de seus arredores e normalmente fornecem respostas simplórias. `,
 			},
 		},
 	],
