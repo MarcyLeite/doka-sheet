@@ -14,6 +14,7 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: '/doka-sheet',
 	plugins: [
 		VueRouter({
 			dts: 'src/typed-router.d.ts',
