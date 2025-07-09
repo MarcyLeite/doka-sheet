@@ -106,9 +106,9 @@
         <v-data-table
           :headers="[
             {title: 'Nome', key:'name'},
-            {title: 'Price', key:'price', maxWidth: '1em', align: 'end'},
-            {title: 'Slots', key:'slotCost', maxWidth: '1em', align: 'end'},
-            {title: '', key: 'effect.description', maxWidth: '3em'},
+            {title: 'Price', key:'price'},
+            {title: 'Slots', key:'slotCost'},
+            {title: '', key: 'effect.description'},
           ]"
           hide-default-footer
           :items="sheet.inventory.itemList"
@@ -119,7 +119,68 @@
               elevation="0"
               @click="() => {
                 dialog = true
-                dialogText = item.description
+                dialogText = item.description ?? ''
+              }"
+            >Description</v-btn>
+          </template>
+        </v-data-table>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-divider class="my-5" />
+    </v-row>
+    <v-row>
+      <span class="text-h6">Inventory Other</span>
+    </v-row>
+    <v-row>
+      <v-col cols="4">
+        <v-number-input
+          control-variant="hidden"
+          hide-details="auto"
+          label="T$"
+          :model-value="sheet.inventoryOther.money"
+          variant="outlined"
+        />
+      </v-col>
+      <v-col cols="4">
+        <v-number-input
+          control-variant="hidden"
+          hide-details="auto"
+          label="Inventory Sell Value"
+          :model-value="sheet.inventoryOther.itemPriceTotal"
+          variant="outlined"
+        />
+      </v-col>
+      <v-col cols="4">
+        <v-number-input
+          control-variant="hidden"
+          hide-details="auto"
+          label="Slots"
+          :model-value="sheet.inventoryOther.slotTotal"
+          :suffix="`${sheet.inventoryOther.slotMax}`"
+          variant="outlined"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-data-table
+          :headers="[
+            {title: 'Nome', key:'name'},
+            {title: 'Price', key:'price'},
+            {title: 'Slots', key:'slotCost'},
+            {title: '', key: 'effect.description'},
+          ]"
+          hide-default-footer
+          :items="sheet.inventoryOther.itemList"
+          :items-per-page="-1"
+        >
+          <template #item.effect.description="{ item }">
+            <v-btn
+              elevation="0"
+              @click="() => {
+                dialog = true
+                dialogText = item.description ?? ''
               }"
             >Description</v-btn>
           </template>

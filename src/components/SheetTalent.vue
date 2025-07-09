@@ -17,6 +17,7 @@
                 ]"
                 hide-default-footer
                 :items="sheet.actionList"
+                :items-per-page="-1"
               >
                 <template #item.effect.description="{ item }">
                   <v-btn
@@ -34,7 +35,7 @@
       </v-col>
     </v-row>
     <v-dialog v-model:model-value="dialog" width="auto">
-      <v-card class="pa-8" width="50em">{{ dialogText }}</v-card>
+      <v-card class="pa-8" width="50em"><div v-for="(text, i) in dialogText.split('\n')" :key="i">{{ text }} <br></div></v-card>
     </v-dialog>
   </v-container>
 </template>
